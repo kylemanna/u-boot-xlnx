@@ -13,10 +13,14 @@
 /* This is the default address for things like dhcp & tftpboot */
 #define CONFIG_LOADADDR		0x2080000
 
+/* Enable GPT partition table */
+#define CONFIG_PARTITION_UUIDS
+#define CONFIG_CMD_GPT
+#define CONFIG_EFI_PARTITION
+
 /* Override ENV settings for board specific settings */
 #define CONFIG_EXTRA_ENV_SETTINGS	\
-	"ethaddr=00:0a:35:00:01:22\0"	\
-	"kernel_image=uImage\0"	\
+	"kernel_image=fitImage\0"	\
 	"kernel_load_address=0x2080000\0" \
 	"ramdisk_image=uramdisk.image.gz\0"	\
 	"ramdisk_load_address=0x4000000\0"	\
@@ -95,5 +99,12 @@
 
 
 #include <configs/zynq-common.h>
+
+/* Override ENV settings from zynq-common, use minimum sector size of 64kB */
+#undef CONFIG_ENV_SIZE
+#undef CONFIG_ENV_SECT_SIZE
+
+#define CONFIG_ENV_SIZE         (64 << 10)
+#define CONFIG_ENV_SECT_SIZE    CONFIG_ENV_SIZE
 
 #endif /* __CONFIG_ZYNQ_PICOZED_H */
