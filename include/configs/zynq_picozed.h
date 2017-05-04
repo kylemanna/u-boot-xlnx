@@ -101,10 +101,20 @@
 #include <configs/zynq-common.h>
 
 /* Override ENV settings from zynq-common, use minimum sector size of 64kB */
-#undef CONFIG_ENV_SIZE
-#undef CONFIG_ENV_SECT_SIZE
+/* #undef CONFIG_ENV_SIZE */
+/* #undef CONFIG_ENV_SECT_SIZE */
+#undef CONFIG_ENV_OFFSET
 
+/*
 #define CONFIG_ENV_SIZE         (64 << 10)
 #define CONFIG_ENV_SECT_SIZE    CONFIG_ENV_SIZE
+*/
+
+/* Mender integration */
+#undef CONFIG_ENV_IS_IN_SPI_FLASH
+#define CONFIG_ENV_IS_IN_MMC
+
+#define CONFIG_BOOTCOUNT_ENV
+#define CONFIG_BOOTCOUNT_LIMIT
 
 #endif /* __CONFIG_ZYNQ_PICOZED_H */
